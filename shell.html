@@ -31,6 +31,7 @@
             height: 100vh;
         }
     </style>
+    <link rel="stylesheet" href="web-settings.css">
 </head>
 
 <body>
@@ -57,7 +58,7 @@
             canvas.addEventListener('mousedown', function (e) {
                 // e.isTrusted ensures this was a physical mouse click
                 if (e.isTrusted && !document.pointerLockElement && !window.mcMenuOpen) {
-                    canvas.requestPointerLock();
+                    canvas.requestPointerLock?.();
                 }
             });
 
@@ -71,7 +72,7 @@
             // but only for non-input elements (the existing rule).
             document.addEventListener('touchstart', function (e) {
                 var t = e.target.tagName;
-                if (t !== 'INPUT' && t !== 'TEXTAREA' && t !== 'BUTTON' && t !== 'SELECT' && t !== 'OPTION') {
+                if (!e.target.closest('#web-settings') && t !== 'INPUT' && t !== 'TEXTAREA' && t !== 'BUTTON' && t !== 'SELECT' && t !== 'OPTION') {
                     e.preventDefault();
                 }
             }, { passive: false });
@@ -89,6 +90,20 @@
             });
         }
     </script>
+    <div id="web-settings">
+        <button id="settings-toggle" type="button" aria-controls="settings-panel" aria-expanded="false">Settings</button>
+        <section id="settings-panel" hidden>
+            <label for="web-language" id="language-label">Website language</label>
+            <select id="web-language">
+                <option value="en">English</option>
+                <option value="zh-Hant">繁體中文</option>
+                <option value="zh-Hans">简体中文</option>
+            </select>
+            <button id="install-app" type="button" aria-controls="install-help" aria-expanded="false">Install app</button>
+            <p id="install-help" role="status" hidden></p>
+        </section>
+    </div>
+    <script src="web-settings.js"></script>
     {{{ SCRIPT }}}
 </body>
 

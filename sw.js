@@ -1,11 +1,16 @@
-const CACHE_NAME = 'minecraft-web-v1';
+const CACHE_NAME = 'minecraft-web-v2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './index.js',
     './index.wasm',
     './mc_platform.js',
-    './manifest.json'
+    './index.data',
+    './manifest.json',
+    './web-settings.css',
+    './web-settings.js',
+    './icons/icon-192.png',
+    './icons/icon-512.png'
 ];
 
 // Install event: cache core assets
@@ -25,7 +30,7 @@ self.addEventListener('activate', event => {
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cacheName => {
-                    if (cacheName !== CACHE_NAME) {
+                    if (cacheName.startsWith('minecraft-web-') && cacheName !== CACHE_NAME) {
                         return caches.delete(cacheName);
                     }
                 })
@@ -66,7 +71,7 @@ self.addEventListener('fetch', event => {
                     if (response) {
                         return response;
                     }
-                    // Could return a fallback offline page here if needed
+                    return Response.error();
                 });
             })
     );
