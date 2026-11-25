@@ -1,0 +1,57 @@
+#web-settings {
+    position: fixed;
+    z-index: 1;
+    inset-block-start: max(12px, env(safe-area-inset-top));
+    inset-inline-end: max(12px, env(safe-area-inset-right));
+    max-width: calc(100vw - 24px);
+    color: #fff;
+    font: 1rem/1.45 system-ui, sans-serif;
+    touch-action: manipulation;
+}
+
+#web-settings button,
+#web-settings select {
+    min-height: 44px;
+    padding: 6px 12px;
+    border: 1px solid #747a6e;
+    border-radius: 6px;
+    background: #272d26;
+    color: inherit;
+    font: inherit;
+}
+
+#web-settings button {
+    cursor: pointer;
+}
+
+#settings-toggle {
+    display: block;
+    margin-inline-start: auto;
+}
+
+#settings-panel {
+    width: min(16rem, calc(100vw - 56px));
+    max-height: calc(100dvh - 84px);
+    overflow: auto;
+    margin-top: 8px;
+    padding: 14px;
+    border: 1px solid #747a6e;
+    border-radius: 8px;
+    background: #171b17;
+    touch-action: pan-y;
+}
+
+#web-language,
+#install-app {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+}
+
+#web-settings [hidden] {
+    display: none;
+}
+
+#install-help {
+    margin: 8px 0 0;
+}
